@@ -1,0 +1,105 @@
+<div class="card page-wrapper">
+    <!-- begin::Header  [(ngModel)]="searchText" -->
+    <div class="card-header border-0  ">
+
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">List </h5>
+            </div>
+            <div class="d-flex justify-content-end">
+
+                <div>
+                    <p class="mt-2 mr-2">Show by</p>
+                </div>
+                <div>
+                    <select class="form-control" (change)="onTableSizeChange($event)">
+                        <option *ngFor="let size of pageSizes">
+                            {{size}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="btnCreate">
+                <button routerLink="/leave/leavetype-add" class="btn btn-outline-black"> Create </button>
+            </div> -->
+        </div>
+        <div>
+            <input class="form-control" [(ngModel)]="searchText" (keyup)="filterData()" placeholder="Type to search...">
+        </div>
+        <!-- end::Header -->
+        <!-- begin::Body -->
+        <div class="card-body py-3" [ngClass]="'d-flex justify-content-center align-items-center'">
+            <!-- begin::Table container -->
+            <div class="table-responsive">
+                <!-- begin::Table -->
+                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                    <!-- begin::Table head -->
+                    <thead class="text-center">
+                        <tr class="fw-bolder text-muted">
+                            <!-- <th>ID</th>
+                            <th>LT ID</th> -->
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th>Type</th>
+                            <!-- <th>CNIC</th> -->
+                            <th>Created at</th>
+
+                        </tr>
+                    </thead>
+                    <!-- end::Table head -->
+                    <!-- begin::Table body -->
+                    <tbody class="text-center">
+                        <tr *ngFor="let data of visibleData">
+                            <!-- <td>{{data.id}}</td>
+                            <td>{{data.leaveTypeId}}</td> -->
+                            <td>{{data.userId}}</td>
+                            <td> <a  routerLink="/customer/customer-details/{{data.id}}">{{data.name}}</a></td>
+                            <td>{{data.number}}</td>
+                            <td>{{data.type}}</td>
+                            <!-- <td>{{data.cnic}}</td> -->
+                            <td>{{data.created_at | date:'medium'}}</td>
+                            <!-- <td>{{data.annual}}</td>
+                            <td>{{data.casual}}</td> -->
+
+
+
+                        </tr>
+                    </tbody>
+                    <!-- end::Table body -->
+                </table>
+                <!-- end::Table -->
+            </div>
+            <!-- <img src="../../../../assets/media/logos/loader.gif" width="50px" *ngIf="isLoading"> -->
+            <!-- end::Table container -->
+            <!-- <div class="row text-center">
+      <h4 *ngIf="users.length == 0 > 0">No Result</h4>
+    </div> -->
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+                src="../../../../assets/gif/planet.gif">
+        </div>
+        <!-- begin::Body -->
+        <!-- <div class="row"> -->
+        <div class="row paginator mt-3 d-flex justify-content-center mb-3">
+            <!-- Working Pagination  -->
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm " (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+            </span>
+            <span class="my-auto col-md-3 col-5 col-sm-4 fs-3 col-lg-2" style="text-align: center;">
+
+                Page&nbsp;&nbsp;<!--[(ngModel)]="currentPage" -->
+                <input type="number" style="text-align: center;" [(ngModel)]="currentPage" (input)="onPageInputChange()"
+                    min="1" max="{{ totalPages }}" /> &nbsp;of &nbsp;{{ totalPages }}
+                <!-- Page  &nbsp;&nbsp; {{ currentPage }}&nbsp;&nbsp;    of &nbsp;&nbsp;   {{ totalPages }} -->
+
+            </span>
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm " (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+            </span>
+        </div>
+
+
+    </div>

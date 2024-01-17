@@ -1,0 +1,256 @@
+<!-- <div class="card page-wrapper" *ngFor="let data of singleData">
+
+    <div class="card-header border-0">
+        <ng-container class="mb-3 mt-3">
+            <div>
+                <div class="d-flex justify-content-between">
+                    <div style="cursor: pointer;">
+                        <p>Revenue : {{data.amountBalance}}</p>
+                    </div>
+                    <div>
+                        <p>Total Amount : {{data.totalAmount}}</p>
+                    </div>
+                </div>
+                <div class="card-body py-3">
+                    <div class="row">
+                        <div class="table-responsive col-12">
+
+                            <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                <thead class="text-center">
+                                    <tr class="fw-bolder text-muted">
+
+                                        <th>SS</th>
+                                        <th>DD</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody class="text-center">
+                                    <tr *ngFor="let customerData of data.getForm">
+                                        <ng-container>
+
+                                            <td>{{customerData.amount}}</td>
+                                            <td>{{customerData.amountBalance}}</td>
+                                          
+                                        </ng-container>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ng-container>
+    </div>
+</div> -->
+<div *ngIf="singleData ===null ? false : true">
+    <div class="row justify-content-center">
+        <div class=" col-xl-4 col-lg-5 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="nc-icon nc-globe text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Total Sales</p>
+                                <p class="card-title"> {{singleData.totalAmount}} Rs
+                                <p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        Total Sales from {{singleData.customer.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="nc-icon nc-money-coins text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Deposit Balance</p>
+
+                                <p class="card-title">{{singleData.amountBalance}} Rs
+                                <p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                        Total Deposit Balance of {{singleData.customer.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="card page-wrapper">
+
+
+    <div class="card-header border-0">
+        <ng-container class="mb-3 mt-3">
+            <div class="d-flex justify-content-center" *ngIf="singleData === null">
+                <div class="text-center">
+                    <p style="font-size: 1.1rem;">
+                        NO DATA FOUND
+
+                    </p>
+
+                </div>
+
+            </div>
+            <div class="pt-3 pl-3">
+                <p style="font-size: 1.1rem;">Name: {{singleData.customer.name}}</p>
+            </div>
+            <!-- <div *ngIf="singleData ===null ? false : true">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-globe text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Total Sales</p>
+                                            <p class="card-title"> {{singleData.totalAmount}}
+                                            <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    Total sales from {{singleData.customer.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-money-coins text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Deposit Balance</p>
+
+                                            <p class="card-title">{{singleData.amountBalance}} Rs
+                                            <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    Total Deposit Balance of {{singleData.customer.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> -->
+            <!-- <div class="d-flex justify-content-between">
+
+
+                    <div class="pt-3">
+
+                        <div>
+                            <span style="font-size: .9rem;">Total Sales:
+                                {{singleData.totalAmount}} Rs</span>
+                        </div>
+                        <div class="pb-3">
+                            <span style="font-size: .9rem;">Deposit Balance: {{singleData.amountBalance}} Rs</span>
+                        </div>
+                    </div>
+
+                </div> -->
+
+            <div class="card-body" *ngIf="singleData ===null ? false : true">
+
+                <div class="row">
+
+                    <div class="table-responsive col-12" style="overflow-y: hidden;">
+
+                        <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                            <thead class="text-center">
+                                <tr class="fw-bolder text-muted">
+
+                                    <th>Delivered B.</th>
+                                    <th>Empty Received</th>
+                                    <th>Bottle Balance</th>
+                                    <th>Amount</th>
+                                    <th>Amount Received</th>
+                                    <th>Amount Balance</th>
+                                    <th>Delivery Boy</th>
+                                    <Th>DB. Phone</Th>
+                                    <th>Date</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody class="text-center">
+                                <tr *ngFor="let customerData of customerDetails">
+                                    <ng-container>
+
+                                        <td>{{customerData.filledDelivered}}</td>
+                                        <td>{{customerData.emptyRecived}}</td>
+                                        <td>{{customerData.bottleBalance}}</td>
+                                        <td>{{customerData.amount}}</td>
+                                        <td>{{customerData.amountRecived}}</td>
+                                        <td>{{customerData.amountBalance}}</td>
+                                        <td>{{customerData.delivery_boy.name}}</td>
+                                        <td>{{customerData.delivery_boy.number}}</td>
+                                        <td>{{customerData.date}}</td>
+
+                                    </ng-container>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex justify-content-center">
+                <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+                    src="../../../../assets/gif/planet.gif">
+            </div>
+        </ng-container>
+    </div>
+
+</div>

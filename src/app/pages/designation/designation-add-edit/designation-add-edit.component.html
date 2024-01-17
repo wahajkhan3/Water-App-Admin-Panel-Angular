@@ -1,0 +1,76 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <h5 *ngIf="!editButton" class="card-title">Add Designation</h5>
+                    <h5 *ngIf="editButton" class="card-title">Edit Designation </h5>
+                </div>
+                <div>
+                    <button routerLink="/designation-list" class="btn btn-outline-warning">Back to list</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="designationForm" (ngSubmit)="designation()">
+                    <div *ngIf="!editButton">
+                        <div class="row">
+
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Designation</label>
+                                    <input type="text" class="form-control" placeholder="Enter Designation"
+                                        formControlName="designation">
+                                    <div *ngIf="submitLeaveForm">
+                                        <div *ngIf="designationForm.get('designation')?.invalid">
+                                            <p *ngIf="designationForm.get('designation')?.hasError('required')"
+                                                style="color: red; font-size: 11px;">Designation field is required</p>
+                                            <p *ngIf="designationForm.get('designation')?.hasError('minlength')"
+                                                style="color: red; font-size: 11px;">More than 1 Letter is required</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div *ngIf="editButton">
+
+                        <div class="row">
+
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Designation</label>
+                                    <input type="text" class="form-control" placeholder="Enter Designation"
+                                        formControlName="designation">
+                                    <div *ngIf="submitLeaveForm">
+                                        <div *ngIf="designationForm.get('designation')?.invalid">
+                                            <p *ngIf="designationForm.get('sick').hasError('required')"
+                                                style="color: red; font-size: 11px;">Designation field is required</p>
+                                            <p *ngIf="designationForm.get('sick').hasError('minlength')"
+                                                style="color: red; font-size: 11px;">More than 1 Letter is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button *ngIf="!editButton" (click)="showNotification('top','right')" type="submit"
+                                class="btn btn-dark">Add Designation</button>
+                            <button *ngIf="editButton" type="submit" (click)="showNotification('top','right')"
+                                class="btn btn-dark">Edit
+                                Designation</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

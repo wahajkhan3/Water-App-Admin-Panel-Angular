@@ -1,0 +1,139 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 *ngIf="!editButton" class="card-title">Add Schedule</h5>
+                <h5 *ngIf="editButton" class="card-title">Edit Schedule</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="scheduleForm" (ngSubmit)="scheduleFormFunc()">
+                    <div *ngIf="!editButton">
+                        <div class="row">
+
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select (change)="onChangeStatus($event,data)" formControlName="type"
+                                        class="form-control">
+                                        <option value="Morning" selected>Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                        <option value="Evening">Evening</option>
+                                    </select>
+                                    <p *ngIf="scheduleForm.get('type')?.invalid && !scheduleForm.get('type').hasError('required') && submitScheduleForm"
+                                        style="color: red; font-size: 11px;"> Please enter valid type</p>
+                                    <p *ngIf="scheduleForm.get('type').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Type field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>TimeIn</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="timeIn">
+                                    <p *ngIf="!scheduleForm.get('timeIn').hasError('required') && scheduleForm.get('timeIn')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;"> Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('timeIn').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">TimeIn field is required</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>TimeOut</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="timeOut">
+                                    <p *ngIf="!scheduleForm.get('timeOut').hasError('required') && scheduleForm.get('timeOut')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('timeOut').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">TimeOut field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Late</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="late">
+                                    <p *ngIf="!scheduleForm.get('late').hasError('required') && scheduleForm.get('late')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('late').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Late field is required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="editButton">
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select (change)="onChangeStatus($event,data)" formControlName="type"
+                                        class="form-control">
+                                        <option value="Morning" selected>Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                        <option value="Evening">Evening</option>
+                                    </select>
+                                    <p *ngIf="scheduleForm.get('type')?.invalid && !scheduleForm.get('type').hasError('required') && submitScheduleForm"
+                                        style="color: red; font-size: 11px;"> Please enter valid type</p>
+                                    <p *ngIf="scheduleForm.get('type').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Type field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>TimeIn</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="timeIn">
+                                    <p *ngIf="!scheduleForm.get('timeIn').hasError('required') && scheduleForm.get('timeIn')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;"> Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('timeIn').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">TimeIn field is required</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>TimeOut</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="timeOut">
+                                    <p *ngIf="!scheduleForm.get('timeOut').hasError('required') && scheduleForm.get('timeOut')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('timeOut').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">TimeOut field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Late</label>
+                                    <input type="time" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="late">
+                                    <p *ngIf="!scheduleForm.get('late').hasError('required') && scheduleForm.get('late')?.invalid && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Please enter valid time</p>
+                                    <p *ngIf="scheduleForm.get('late').hasError('required')  && submitScheduleForm"
+                                        style="color: red; font-size: 11px;">Late field is required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="update ml-auto mr-auto">
+                            <button *ngIf="!editButton" (click)="showNotification('top','right')" type="submit"
+                                class="btn btn-dark">Add Schedule</button>
+                            <button *ngIf="editButton" (click)="showNotification('top','right')"  type="submit"
+                                class="btn btn-dark">Edit 
+                                Schedule</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

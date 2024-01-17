@@ -1,0 +1,48 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">Send Notification</h5>
+
+            </div>
+            <div class="card-body">
+                <form [formGroup]="notificationForm" (ngSubmit)="sendNotification()">
+
+                    <div class="row">
+                        <div class="col-md-11 mx-auto">
+                            <div class="form-group">
+                                <label for="">Title</label>
+                                <input type="text" formControlName="title" class="form-control">
+                                <p *ngIf="!notificationForm.get('title')?.hasError('required') && notificationForm.get('title')?.invalid && submitNotificationSend"  style="color: red; font-size: 11px;">Must have 6 letters</p>
+                                <p *ngIf="notificationForm.get('title')?.hasError('required') && submitNotificationSend"  style="color: red; font-size: 11px;">Title is required</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-11 mx-auto">
+                            <div class="form-group">
+                                <label >Title</label>
+                                <textarea name="message" formControlName="message" class="form-control" id="" cols="50" rows="20"></textarea>
+                                <p *ngIf="!notificationForm.get('message')?.hasError('required') && notificationForm.get('message')?.invalid && submitNotificationSend"  style="color: red; font-size: 11px;">Must have 10 letters</p>
+                                <p *ngIf="notificationForm.get('message')?.hasError('required') && submitNotificationSend"  style="color: red; font-size: 11px;">Message is required</p>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="update ml-auto mr-auto">
+                            <button type="submit" (click)="showNotification('top','right')"
+                                class="btn ">SEND NOTIFICTAION</button>
+                        
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="card page-wrapper" style="margin-top: 7rem;">
+    <!-- begin::Header  [(ngModel)]="searchText" -->
+    <div class="card-header border-0  ">
+
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title"> Single User Task</h5>
+            </div>
+            <div class="btnCreate">
+                <button class="btn btn-danger" routerLink="/task/task-list">Back</button>
+            </div>
+        </div>
+        <!-- <div>
+            <input class="form-c ontrol"   placeholder="Type to search...">
+        </div> -->
+        <!-- end::Header -->
+        <!-- begin::Body -->
+        <div class="card-body py-3">
+
+
+            <!-- begin::Table container -->
+            <div class="table-responsive">
+                <!-- begin::Table -->
+                <table *ngIf="!isLoading" class="table table-row-bordered  gs-0 gy-3">
+                    <!-- begin::Table head -->
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{singleUserTask.id}}</td>
+                        </tr>
+                        <tr>
+                            <th>User ID</th>
+                            <td>{{singleUserTask.userId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Admin ID</th>
+                            <td>{{singleUserTask.adminId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{singleUserTask.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{singleUserTask.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Title</th>
+                            <td>{{singleUserTask.title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{singleUserTask.desc}}</td>
+                        </tr>
+                        <tr>
+                            <th>Priority</th>
+                            <td>{{singleUserTask.priority}}</td>
+                        </tr>
+                        <tr>
+                            <th>Task Start From</th>
+                            <td>{{singleUserTask.taskStartFrom}}</td>
+                        </tr>
+                        <tr>
+                            <th>Task End Date</th>
+                            <td>{{singleUserTask.taskEndTo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Task Status</th>
+                            <td>{{singleUserTask.status}}</td>
+                        </tr> 
+                        <tr>
+                            <th>Created At</th>
+                            <td>{{singleUserTask.created_at}}</td>
+                        </tr>
+                        
+                       
+                        
+                    </tbody>
+                    <!-- end::Table body -->
+                </table>
+                <!-- end::Table -->
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; padding-bottom: 50px;" *ngIf="isLoading" width="100px"
+                src="../../../../assets/gif/planet.gif">
+        </div>
+        <!-- begin::Body -->
+        <!-- <div class="row"> -->
+
+
+    </div>

@@ -1,0 +1,151 @@
+<div class="card page-wrapper">
+    <!-- begin::Header  [(ngModel)]="searchText" -->
+    <div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h5 class="card-title">List </h5>
+        </div>
+        <div class="d-flex justify-content-end">
+
+            <div >
+                <p class="mt-2 mr-2">Show by</p>
+            </div>
+            <div>
+                <select class="form-control" (change)="onTableSizeChange($event)">
+                    <option *ngFor="let size of pageSizes">
+                        {{size}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="btnCreate">
+            <button routerLink="/leave/leavetype-add"> Create </button>
+        </div> -->
+    </div>
+    <nav>
+        <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" (click)="filterUser('Active')" type="button" role="tab" aria-controls="nav-home">Active</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Inactive')" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile">In-Active</button>
+      </div> -->
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link" [class.active]="isActive === 'All'" id="nav-all-tab" data-bs-toggle="tab" (click)="filterUser('All')" type="button" role="tab" aria-controls="nav-all">All</button>
+        <button class="nav-link" [class.active]="isActive === 'Active'" id="nav-home-tab" data-bs-toggle="tab" (click)="filterUser('Active')" type="button" role="tab" aria-controls="nav-home">Active</button>
+        <button class="nav-link" [class.active]="isActive === 'Inactive'" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Inactive')" type="button" role="tab" aria-controls="nav-profile">In-Active</button>
+    </div>
+    
+      </nav>
+</div>
+    <div class="card-header border-0  ">
+
+
+        
+        
+        <div>
+            <input class="form-control" [(ngModel)]="searchText" (keyup)="filterData()" placeholder="Type to search...">
+        </div>
+        <!-- end::Header -->
+        <!-- begin::Body -->
+        <div class="card-body py-3" [ngClass]="'d-flex justify-content-center align-items-center'">
+            <!-- begin::Table container -->
+            <div class="table-responsive">
+                <!-- begin::Table -->
+                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                    <!-- begin::Table head -->
+                    <thead class="text-center">
+                        <tr class="fw-bolder text-muted">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact No</th>
+                            <th>Designation</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
+                        </tr>
+                    </thead>
+                    <!-- end::Table head -->
+                    <!-- begin::Table body -->
+                    <tbody class="text-center">
+                        <tr *ngFor="let data of visibleData">
+                            <td>{{data.name}}</td>
+                            <!-- <td>
+                            <a  class="text-dark fw-bolder text-hover-primary fs-6">
+                            {{data.id}}
+                            </a>
+                        </td> -->
+                            <td>
+                                {{data.email}}
+                            </td>
+                            <td>{{data.contactNo}}</td>
+                            <td>{{data.designation}}</td>
+                            <td>
+                                <!-- <a href={{base+data.image}}>
+                                    <img [src]="base+data.image" width="50px" height="50px" style="border-radius: 50%;"
+                                        alt="">
+                                </a> -->
+                                <a href="javascript:void(0);" (click)="openImageModal(base + data.image)">
+                                    <img [src]="base + data.image" width="40px" height="40px" style="border-radius: 50%;" alt="">
+                                  </a>
+                            </td>
+                            <div class="image-modal" *ngIf="showImageModal">
+                                <div class="modal-content">
+                                  <span class="close" (click)="closeImageModal()">&times;</span>
+                                  <img [src]="currentImage" alt="Enlarged Image">
+                                </div>
+                              </div>
+                            <td>{{data.status}}</td>
+                            <td>
+                                <!-- <button routerLink="/requirements/requirement-details/{}" class="btn btn-primary btn-sm mr-1 btnView"
+                                style="background-color: #d72480;height: 32px;"><i class="fa fa-search pt-1"
+                                     aria-hidden="true"></i></button> -->
+                                <button routerLink="/admin/admin-edit/{{data.id}}"
+                                    class="btn btn-secondary btn-sm mr-1 btnEdit"
+                                    style="height: 32px;"><i
+                                        class="fa fa-pencil-square-o pt-1" aria-hidden="true"></i></button>
+                                <!-- <button (click)="groupDel(data.id)" class="btn btn-primary btn-sm btnDel"
+                                style="background-color: #EA5455;height: 32px;"><i class="fa fa-trash-o pt-1"
+                                     aria-hidden="true"></i></button> -->
+                            </td>
+                       
+  
+                
+                        </tr>
+                    </tbody>
+                    <!-- end::Table body -->
+                </table>
+                <!-- end::Table -->
+            </div>
+            <!-- <img src="../../../../assets/media/logos/loader.gif" width="50px" *ngIf="isLoading"> -->
+            <!-- end::Table container -->
+            <!-- <div class="row text-center">
+      <h4 *ngIf="users.length == 0 > 0">No Result</h4>
+    </div> -->
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+                src="../../../../assets/gif/planet.gif">
+        </div>
+        <!-- begin::Body -->
+       <!-- <div class="row"> -->
+        <div class="row paginator mt-1 d-flex justify-content-center mb-3">
+            <!-- Working Pagination  -->
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm " (click)="prevPage()"
+                    [disabled]="currentPage === 1">Prev</button>
+            </span>
+            <span class="my-auto col-md-3 col-5 col-sm-4 fs-3 col-lg-2" style="text-align: center;">
+
+                Page&nbsp;&nbsp;<!--[(ngModel)]="currentPage" -->
+                <input type="number" style="text-align: center;" [(ngModel)]="currentPage" (input)="onPageInputChange()"
+                    min="1" max="{{ totalPages }}" /> &nbsp;of &nbsp;{{ totalPages }}
+                <!-- Page  &nbsp;&nbsp; {{ currentPage }}&nbsp;&nbsp;    of &nbsp;&nbsp;   {{ totalPages }} -->
+
+            </span>
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm " (click)="nextPage()"
+                    [disabled]="currentPage === totalPages">Next</button>
+            </span>
+        </div>
+
+
+    </div>

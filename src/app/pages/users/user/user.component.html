@@ -1,0 +1,489 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 *ngIf="!editButton" class="card-title">User Registration</h5>
+        <h5 *ngIf="editButton" class="card-title">Edit User Details</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userSignUpForm" (ngSubmit)="addEditForm()">
+          <div *ngIf="!editButton">
+            <div class="row">
+
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your Full Name" formControlName="name">
+                  <p *ngIf="userSignUpForm.get('name')?.invalid && !userSignUpForm.get('name').hasError('required') && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Name</p>
+                  <p *ngIf="userSignUpForm.get('name').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Name is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  <p *ngIf="!userSignUpForm.get('email').hasError('required') && userSignUpForm.get('email')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Email</p>
+                  <p *ngIf="userSignUpForm.get('email').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Email is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+                  <p *ngIf="!userSignUpForm.get('password').hasError('required') && userSignUpForm.get('password')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Password must have 8 alphabets or digits</p>
+                  <p *ngIf="userSignUpForm.get('password').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Password is required</p>
+
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control" placeholder="Repeat password"
+                    formControlName="passwordConfirm">
+                  <p *ngIf="userSignUpForm.get('passwordConfirm')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Password and Confirm Password do not match</p>
+                  <p *ngIf="userSignUpForm.get('passwordConfirm').hasError('required') && !userSignUpForm.get('passwordConfirm')?.invalid  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Confirm Password is required</p>
+                  <p *ngIf="userSignUpForm.hasError('passwordsNotMatching') && !userSignUpForm.get('passwordConfirm')?.invalid  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">
+                    Password and Confirm Password do not match.</p>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Joining Date</label>
+                  <input type="date" class="form-control" placeholder="Enter Employee joining date"
+                    formControlName="joinDate">
+                  <!-- <p *ngIf=" !userSignUpForm.get('joinDate').hasError('required') && userSignUpForm.get('joinDate')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Contact No must have 11 numbers</p> -->
+                  <p *ngIf="userSignUpForm.get('joinDate').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Join date field is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Employee ID</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee ID" formControlName="employeeId">
+                  <!-- <p *ngIf="!userSignUpForm.get('employeeID').hasError('required') && userSignUpForm.get('employeeID')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Family Contact No must have 11 numbers</p> -->
+                  <p *ngIf="userSignUpForm.get('employeeId').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Employee ID is required</p>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Contact No</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your contact number" formControlName="contactNo">
+                  <p *ngIf=" !userSignUpForm.get('contactNo').hasError('required') && userSignUpForm.get('contactNo')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Contact No should be >= 10 numbers</p>
+                  <p *ngIf="userSignUpForm.get('contactNo').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Contact No is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Family Contact No</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your family contact number" formControlName="famContactNo">
+                  <p *ngIf="!userSignUpForm.get('famContactNo').hasError('required') && userSignUpForm.get('famContactNo')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Family Contact No should be >= 10 numbers</p>
+                  <p *ngIf="userSignUpForm.get('famContactNo').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Family Contact No is required</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Role</label>
+                  <select class="form-control" formControlName="role">
+                    <option value="User">User</option>
+                    <!-- <option value="Sales and Marketing">Sales and Marketing</option>
+                    <option value="HR">Human Resource</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Inventory Manager">Inventory Manager</option> -->
+                    <!-- <option value=""></option> -->
+                  </select>
+                  <p *ngIf="!userSignUpForm.get('role').hasError('required') && userSignUpForm.get('role')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Role</p>
+                  <p *ngIf="userSignUpForm.get('role').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Role is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>CNIC</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your CNIC number" formControlName="cnic">
+                  <p *ngIf="!userSignUpForm.get('cnic').hasError('required') && userSignUpForm.get('cnic')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> CNIC should be >= 10 numbers</p>
+                  <p *ngIf="userSignUpForm.get('cnic').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">CNIC is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Leave Type</label>
+                  <select type formControlName="leaveTypeId" [(ngModel)]="selectedUserId" class="form-control">
+                    <option *ngFor="let users of leaveTypeUsers" [value]="users.id">{{users.name}}</option>>
+                    <!-- <option value="High">High</option> -->
+                  </select>
+                  <p *ngIf="!userSignUpForm.get('leaveTypeId').hasError('required') && userSignUpForm.get('leaveTypeId')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Leave Type</p>
+                  <p *ngIf="userSignUpForm.get('leaveTypeId').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Leave Type is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Designation</label>
+                  <select type formControlName="designation" [(ngModel)]="selectUserIdForDesig" class="form-control">
+                    <option *ngFor="let designation of userDesignation" [value]="designation.id">
+                      {{designation.designation}}</option>
+                    <!-- <option value="High">High</option> -->
+                  </select>
+
+                  <p *ngIf="!userSignUpForm.get('designation').hasError('required') && userSignUpForm.get('designation')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Please choose valid designation</p>
+                  <p *ngIf="userSignUpForm.get('designation').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Designation is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" placeholder="Enter your address" formControlName="address">
+                  <p *ngIf="!userSignUpForm.get('address').hasError('required')  && userSignUpForm.get('address')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid address</p>
+                  <p *ngIf="userSignUpForm.get('address').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Address is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Schedule</label>
+                  <input type="number" class="form-control" placeholder="Enter your Schedule ID"
+                    formControlName="schedule">
+                  <p *ngIf="!userSignUpForm.get('schedule').hasError('required') && userSignUpForm.get('schedule')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid schedule ID</p>
+                  <p *ngIf="userSignUpForm.get('schedule').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Schedule is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Image</label>
+                  <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input #imageFile type="file" (change)="uploadImage($event, imageFile)" accept=".png, .jpg, .jpeg"
+                        class="custom-file-input" id="inputGroupFile01" formControlName="image">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                  <p *ngIf="userSignUpForm.get('image').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Image is required</p>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="role">Designation</label>
+                 <ng-select [(ngModel)]="selectedCar">
+                  <ng-option *ngFor="let car of selectedCar" [value]="car.id">{{car.name}}</ng-option>
+               </ng-select> 
+               
+               Using items input
+               <ng-select 
+                          id="role",
+                          formControlName="designation",
+                          
+                          items="desig" 
+                          bindLabel="name" 
+                          bindValue="id" 
+                          placeholder="Select Designation"
+                          [(ngModel)]="selectedDesig"
+                          >
+               </ng-select>  
+              </div>
+            </div>
+          </div> -->
+
+
+          </div>
+          <div *ngIf="editButton">
+            <div class="row">
+
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your Full Name" formControlName="name">
+                  <p *ngIf="userSignUpForm.get('name')?.invalid && !userSignUpForm.get('name').hasError('required') && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Name</p>
+                  <p *ngIf="userSignUpForm.get('name').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Name is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  <p *ngIf="!userSignUpForm.get('email').hasError('required') && userSignUpForm.get('email')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Email</p>
+                  <p *ngIf="userSignUpForm.get('email').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Email is required</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+                  <p *ngIf="!userSignUpForm.get('password').hasError('required') && userSignUpForm.get('password')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Password must have 8 alphabets or digits</p>
+                  <p *ngIf="userSignUpForm.get('password').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Password is required</p>
+
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control" placeholder="Repeat password"
+                    formControlName="passwordConfirm">
+                  <p *ngIf="userSignUpForm.get('passwordConfirm').hasError('required') && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Confirm Password is required</p>
+                  <p *ngIf="userSignUpForm.hasError('passwordsNotMatching') && !userSignUpForm.get('passwordConfirm').hasError('required') && submitUserSignUp"
+                    style="color: red; font-size: 11px;">
+                    Password and Confirm Password do not match.</p>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Joining Date</label>
+                  <input type="date" class="form-control" placeholder="Enter Employee joining date"
+                    formControlName="joinDate">
+                  <!-- <p *ngIf=" !userSignUpForm.get('joinDate').hasError('required') && userSignUpForm.get('joinDate')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Contact No must have 11 numbers</p> -->
+                  <p *ngIf="userSignUpForm.get('joinDate').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Join date field is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Employee ID</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee ID" formControlName="employeeId">
+                  <!-- <p *ngIf="!userSignUpForm.get('employeeID').hasError('required') && userSignUpForm.get('employeeID')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Family Contact No must have 11 numbers</p> -->
+                  <p *ngIf="userSignUpForm.get('employeeId').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Employee ID is required</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Contact No</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your contact number" formControlName="contactNo">
+                  <p *ngIf=" !userSignUpForm.get('contactNo').hasError('required') && userSignUpForm.get('contactNo')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Contact No should be >= 10 numbers
+                  </p>
+                  <p *ngIf="userSignUpForm.get('contactNo').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Contact No is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Family Contact No</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your family contact number" formControlName="famContactNo">
+                  <p *ngIf="!userSignUpForm.get('famContactNo').hasError('required') && userSignUpForm.get('famContactNo')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Family Contact No should be >= 10 numbers</p>
+                  <p *ngIf="userSignUpForm.get('famContactNo').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Family Contact No is required</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Role</label>
+                  <!-- <input type="text" class="form-control" placeholder="Enter your Role" formControlName="role"> -->
+                  <select class="form-control" formControlName="role">
+                    <option value="User">User</option>
+                    <!-- <option value="Sales and Marketing">Sales and Marketing</option>
+                    <option value="HR">Human Resource</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Inventory Manager">Inventory Manager</option> -->
+                    <!-- <option value=""></option> -->
+                  </select>
+                  <p *ngIf="!userSignUpForm.get('role').hasError('required') && userSignUpForm.get('role')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid role</p>
+                  <p *ngIf="userSignUpForm.get('role').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Role is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>CNIC</label>
+                  <input type="text" class="form-control" (input)="onContactNumberInput($event)"
+                    placeholder="Enter your CNIC number" formControlName="cnic">
+                  <p *ngIf="!userSignUpForm.get('cnic').hasError('required') && userSignUpForm.get('cnic')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> CNIC should be >= 10 numbers</p>
+                  <p *ngIf="userSignUpForm.get('cnic').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">CNIC is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Leave Type</label>
+                  <select type formControlName="leaveTypeId" [(ngModel)]="selectedUserId" class="form-control">
+                    <option *ngFor="let users of leaveTypeUsers" [value]="users.id">{{users.name}}</option>>
+                    <!-- <option value="High">High</option> -->
+                  </select>
+                  <p *ngIf="!userSignUpForm.get('leaveTypeId').hasError('required') && userSignUpForm.get('leaveTypeId')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Leave Type</p>
+                  <p *ngIf="userSignUpForm.get('leaveTypeId').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Leave Type is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Designation</label>
+                  <select type formControlName="designation" [(ngModel)]="selectUserIdForDesig" class="form-control">
+                    <option *ngFor="let designation of userDesignation" [value]="designation.id">
+                      {{designation.designation}}</option>
+                    <!-- <option value="High">High</option> -->
+                  </select>
+
+                  <p *ngIf="!userSignUpForm.get('designation').hasError('required') && userSignUpForm.get('designation')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Please choose valid designation</p>
+                  <p *ngIf="userSignUpForm.get('designation').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Designation is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" placeholder="Enter your address" formControlName="address">
+                  <p *ngIf="!userSignUpForm.get('address').hasError('required')  && userSignUpForm.get('address')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid address</p>
+                  <p *ngIf="userSignUpForm.get('address').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Address is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Schedule</label>
+                  <input type="text" class="form-control" placeholder="Enter your Schedule" formControlName="schedule">
+                  <p *ngIf="!userSignUpForm.get('schedule').hasError('required') && userSignUpForm.get('schedule')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;"> Enter a valid Schedule</p>
+                  <p *ngIf="userSignUpForm.get('schedule').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Schedule is required</p>
+                </div>
+              </div>
+              <!-- <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Image</label>
+                  <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input #imageFile type="file" (change)="uploadImage($event, imageFile)" accept=".png, .jpg, .jpeg"
+                        class="custom-file-input" id="inputGroupFile01" formControlName="image">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                  <p *ngIf="!userSignUpForm.get('image').hasError('required') && userSignUpForm.get('image')?.invalid && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Image is required</p>
+                  <p *ngIf="userSignUpForm.get('image').hasError('required')  && submitUserSignUp"
+                    style="color: red; font-size: 11px;">Image is required</p>
+                </div>
+              </div> -->
+            </div>
+
+
+            <!-- <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="role">Designation</label>
+                 <ng-select [(ngModel)]="selectedCar">
+                  <ng-option *ngFor="let car of selectedCar" [value]="car.id">{{car.name}}</ng-option>
+               </ng-select> 
+               
+               Using items input
+               <ng-select 
+                          id="role",
+                          formControlName="designation",
+                          
+                          items="desig" 
+                          bindLabel="name" 
+                          bindValue="id" 
+                          placeholder="Select Designation"
+                          [(ngModel)]="selectedDesig"
+                          >
+               </ng-select>  
+              </div>
+            </div>
+          </div> -->
+
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button *ngIf="!editButton" type="submit" (click)="showNotification('top','right')"
+                class="btn btn-dark">Register
+                User</button>
+              <button *ngIf="editButton" type="submit" (click)="showNotification('top','right')"
+                class="btn btn-dark">Edit
+                User Details</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

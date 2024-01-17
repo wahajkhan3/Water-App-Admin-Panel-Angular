@@ -1,0 +1,106 @@
+<div class="card page-wrapper" style="margin-top: 7rem;">
+    <!-- begin::Header  [(ngModel)]="searchText" -->
+    <div class="card-header border-0  ">
+
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">User Details</h5>
+            </div>
+            <div class="btnCreate">
+                <button class="btn btn-danger" routerLink="/userlist">Back</button>
+            </div>
+        </div>
+        <!-- <div>
+            <input class="form-control"   placeholder="Type to search...">
+        </div> -->
+        <!-- end::Header -->
+        <!-- begin::Body -->
+        <div class="card-body py-3">
+
+
+            <!-- begin::Table container -->
+            <div class="table-responsive">
+                <!-- begin::Table -->
+                <table *ngIf="!isLoading" class="table table-row-bordered  gs-0 gy-3">
+                    <!-- begin::Table head -->
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{details.id}}</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{details.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{details.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Role</th>
+                            <td>{{details.role}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{{details.status}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{details.address}}</td>
+                        </tr>
+                        <tr>
+                            <th>Designation</th>
+                            <td>{{details.designation}}</td>
+                        </tr>
+                        <tr>
+                            <th>CNIC</th>
+                            <td>{{details.cnic}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact No</th>
+                            <td>{{details.contactNo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Family Contact No</th>
+                            <td>{{details.famContactNo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Employed or Suspended</th>
+                            <td>{{details.isEmployee}}</td>
+                        </tr> 
+                        <tr>
+                            <th>Created At</th>
+                            <td>{{details.created_at | date:'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{details.updated_at | date:'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Week Duration</th>
+                            <td>{{details.totalDurationOfTheWeek}}</td>
+                        </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td> 
+                                <img [src]="base + details.image" width="150px" height="150px" style="border: 50%;" alt="">
+                            </td>
+                        </tr> 
+                        
+                    </tbody>
+                    <!-- end::Table body -->
+                </table>
+                <!-- end::Table -->
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; padding-bottom: 50px;" *ngIf="isLoading" width="100px"
+                src="../../../../assets/gif/planet.gif">
+        </div>
+        <!-- begin::Body -->
+        <!-- <div class="row"> -->
+
+
+    </div>

@@ -1,0 +1,109 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <h5 *ngIf="!editButton" class="card-title">Add Leave </h5>
+                    <h5 *ngIf="editButton" class="card-title">Edit Leave </h5>
+                </div>
+                <div>
+                    <button routerLink="/leave/leaves-list" class="btn btn-outline-warning">Back to list</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="leaveForm" (ngSubmit)="leave()">
+                    <div *ngIf="!editButton">
+                        <div class="row">
+
+                            <div class="col-md-4 pr-1">
+                                <div class="form-group">
+                                    <label>Sick</label>
+                                    <input type="number" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="sick">
+                                    <p *ngIf="leaveForm.get('sick')?.invalid && !leaveForm.get('sick').hasError('required') && submitLeaveForm"
+                                        style="color: red; font-size: 11px;"> Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('sick').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Sick field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Annual</label>
+                                    <input type="number" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="annual">
+                                    <p *ngIf="!leaveForm.get('annual').hasError('required') && leaveForm.get('annual')?.invalid && submitLeaveForm"
+                                        style="color: red; font-size: 11px;"> Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('annual').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Annual field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label>Casual</label>
+                                    <input type="number" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="casual">
+                                    <p *ngIf="!leaveForm.get('casual').hasError('required') && leaveForm.get('casual')?.invalid && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('casual').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Cascual is required</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div *ngIf="editButton">
+
+                       <div class="row">
+
+                            <div class="col-md-4 pr-1">
+                                <div class="form-group">
+                                    <label>Sick</label>
+                                    <input type="text" class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="sick">
+                                    <p *ngIf="leaveForm.get('sick')?.invalid && !leaveForm.get('sick').hasError('required') && submitLeaveForm"
+                                        style="color: red; font-size: 11px;"> Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('sick').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Sick field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Annual</label>
+                                    <input class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="annual">
+                                    <p *ngIf="!leaveForm.get('annual').hasError('required') && leaveForm.get('annual')?.invalid && submitLeaveForm"
+                                        style="color: red; font-size: 11px;"> Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('annual').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Annual field is required</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label>Casual</label>
+                                    <input class="form-control" placeholder="Enter No. of Leaves"
+                                        formControlName="casual">
+                                    <p *ngIf="!leaveForm.get('casual').hasError('required') && leaveForm.get('casual')?.invalid && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Enter valid value</p>
+                                    <p *ngIf="leaveForm.get('casual').hasError('required')  && submitLeaveForm"
+                                        style="color: red; font-size: 11px;">Cascual is required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="update ml-auto mr-auto">
+                            <button *ngIf="!editButton" (click)="showNotification('top','right')" type="submit"
+                                class="btn btn-dark">Add Leave</button>
+                            <button *ngIf="editButton" type="submit" (click)="showNotification('top','right')"
+                                class="btn btn-dark">Edit 
+                                Leave</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

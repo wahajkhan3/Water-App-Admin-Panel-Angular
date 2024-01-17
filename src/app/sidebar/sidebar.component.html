@@ -1,0 +1,103 @@
+<!-- 
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/Logo/logo.png">
+      </div>
+    </a>
+    <a routerLink="/dashboard" class="simple-text logo-normal">
+      Time Management
+    </a>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a routerLink="/dashboard" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="../../assets/img/Logo/water-logo4.jpg">
+      </div>
+    </a>
+    <a routerLink="/dashboard" class="simple-text logo-normal">
+      Water HQ
+    </a>
+  </div>
+  <ul class="nav sidebar-content">
+    <ng-container *ngFor="let menuItem of menuItems; let i = index">
+      <ng-container *ngIf="menuItem.children; else noChildren">
+        <li routerLinkActive="active" class="{{menuItem.class}}">
+          <a href="javascript:void(0);" data-toggle="collapse" [attr.data-target]="'#userDropdown' + i" aria-expanded="false">
+            <i class="nc-icon {{menuItem.icon}}"></i>
+            <p>{{menuItem.title}} <b class="caret"></b></p>
+          </a>
+        </li>
+        <ul class="collapse" [id]="'userDropdown' + i">
+          <li *ngFor="let childItem of menuItem.children" routerLinkActive="active" class="{{childItem.class}}">
+            <a [routerLink]="[childItem.path]">
+              <i class="nc-icon {{childItem.icon}}"></i>
+              <p>{{childItem.title}}</p>
+            </a>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noChildren>
+        <li routerLinkActive="active" class="{{menuItem.class}}">
+          <a [routerLink]="[menuItem.path]">
+            <i class="nc-icon {{menuItem.icon}}"></i>
+            <p>{{menuItem.title}}</p>
+          </a>
+        </li>
+      </ng-template>
+    </ng-container>
+  </ul>
+</div>
+
+<!-- <div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/Logo/logo.png">
+      </div>
+    </a>
+    <a routerLink="/dashboard" class="simple-text logo-normal">
+      Time Management
+    </a>
+  </div>
+  <ul class="nav">
+    <ng-container *ngFor="let menuItem of menuItems">
+      <ng-container *ngIf="menuItem.children; else noChildren">
+        <li routerLinkActive="active" class="{{menuItem.class}}">
+          <a href="javascript:void(0);" data-toggle="collapse" [attr.data-target]="'#userDropdown'" aria-expanded="false">
+            <i class="nc-icon {{menuItem.icon}}"></i>
+            <p>{{menuItem.title}} <b class="caret"></b></p>
+          </a>
+        </li>
+        <ul class="collapse" id="userDropdown">
+          <li *ngFor="let childItem of menuItem.children" routerLinkActive="active" class="{{childItem.class}}">
+            <a [routerLink]="[childItem.path]">
+              <i class="nc-icon {{childItem.icon}}"></i>
+              <p>{{childItem.title}}</p>
+            </a>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noChildren>
+        <li routerLinkActive="active" class="{{menuItem.class}}">
+          <a [routerLink]="[menuItem.path]">
+            <i class="nc-icon {{menuItem.icon}}"></i>
+            <p>{{menuItem.title}}</p>
+          </a>
+        </li>
+      </ng-template>
+    </ng-container>
+  </ul>
+</div> -->

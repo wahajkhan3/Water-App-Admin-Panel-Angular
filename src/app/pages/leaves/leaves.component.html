@@ -1,0 +1,264 @@
+<div class="row">
+  <!-- <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="assets/img/damir-bosnjak.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
+              <h5 class="title">Chet Faker</h5>
+            </a>
+            <p class="description">
+              @chetfaker
+            </p>
+          </div>
+          <p class="description text-center">
+            "I like the way you work it
+            <br> No diggity
+            <br> I wanna bag it up"
+          </p>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="button-container">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                <h5>12
+                  <br>
+                  <small>Files</small>
+                </h5>
+              </div>
+              <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                <h5>2GB
+                  <br>
+                  <small>Used</small>
+                </h5>
+              </div>
+              <div class="col-lg-3 mr-auto">
+                <h5>24,6$
+                  <br>
+                  <small>Spent</small>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Team Members</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled team-members">
+            <li>
+              <div class="row">
+                <div class="col-md-2 col-2">
+                  <div class="avatar">
+                    <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                  </div>
+                </div>
+                <div class="col-md-7 col-7">
+                  DJ Khaled
+                  <br />
+                  <span class="text-muted">
+                    <small>Offline</small>
+                  </span>
+                </div>
+                <div class="col-md-3 col-3 text-right">
+                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-md-2 col-2">
+                  <div class="avatar">
+                    <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                  </div>
+                </div>
+                <div class="col-md-7 col-7">
+                  Creative Tim
+                  <br />
+                  <span class="text-success">
+                    <small>Available</small>
+                  </span>
+                </div>
+                <div class="col-md-3 col-3 text-right">
+                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-md-2 col-2">
+                  <div class="avatar">
+                    <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                  </div>
+                </div>
+                <div class="col-ms-7 col-7">
+                  Flume
+                  <br />
+                  <span class="text-danger">
+                    <small>Busy</small>
+                  </span>
+                </div>
+                <div class="col-md-3 col-3 text-right">
+                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Leave Request</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="leaveForm" (ngSubmit)="submitLeave()">
+          <div class="row">
+            <!-- <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Company </label>
+                  <input type="text" class="form-control" disabled="" placeholder="Company" value="Code Augment">
+                </div>
+              </div> -->
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Date From</label>
+                <input type="date" class="form-control" placeholder="Leave start date" formControlName="dateFrom">
+                <p *ngIf="leaveForm.get('dateFrom') && leaveForm.get('dateFrom')?.invalid && leaveForm.get('dateFrom')?.touched && submitLeaveForm"
+                  style="color: red; font-size: 11px;"> Enter a valid date</p>
+                <p *ngIf="leaveForm.get('dateFrom').hasError('required')  && submitLeaveForm"
+                  style="color: red; font-size: 11px;">This field is required</p>
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label for="dateTo">Date To</label>
+                <input type="date" class="form-control" placeholder="Leave end date" formControlName="dateTo">
+                <p *ngIf="leaveForm.get('dateTo') && leaveForm.get('dateTo')?.invalid && leaveForm.get('dateTo')?.touched && submitLeaveForm"
+                  style="color: red; font-size: 11px;"> Enter a valid date</p>
+                <p *ngIf="leaveForm.get('dateTo').hasError('required')  && submitLeaveForm"
+                  style="color: red; font-size: 11px;">This field is required</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label for="userID">Date To</label>
+                <input type="number" class="form-control" placeholder="Leave end date" formControlName="userID">
+                <p *ngIf="leaveForm.get('userID') && leaveForm.get('userID')?.invalid && leaveForm.get('userID')?.touched && submitLeaveForm"
+                  style="color: red; font-size: 11px;"> Enter a valid date</p>
+                <p *ngIf="leaveForm.get('userID').hasError('required')  && submitLeaveForm"
+                  style="color: red; font-size: 11px;">This field is required</p>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+                  <p *ngIf="leaveForm.get('password') && leaveForm.get('password')?.invalid && leaveForm.get('password')?.touched && submitleaveForm" style="color: red; font-size: 11px;"> Password must have 2 alphabets or digits</p>
+                  <p *ngIf="leaveForm.get('password').hasError('required')  && submitleaveForm" style="color: red; font-size: 11px;">This field is required</p>
+                 
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control" placeholder="Repeat password" formControlName="passwordConfirm"> -->
+          <!-- <p *ngIf="leaveForm.get('passwordConfirm') && leaveForm.get('passwordConfirm')?.invalid && leaveForm.get('passwordConfirm')?.touched" style="color: red; font-size: 11px;"> Enter a Valid Name</p> -->
+          <!-- <p *ngIf="leaveForm.get('passwordConfirm').hasError('required')  && submitleaveForm" style="color: red; font-size: 11px;">This field is required</p>
+                  <p *ngIf="leaveForm.hasError('passwordsNotMatching')  && submitleaveForm" style="color: red; font-size: 11px;">
+                  Password and Confirm Password do not match.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Contact No</label>
+                  <input type="number" class="form-control" placeholder="Enter your contact number" formControlName="contactNo">
+                  <p *ngIf="leaveForm.get('contactNo') && leaveForm.get('contactNo')?.invalid && leaveForm.get('contactNo')?.touched && submitleaveForm" style="color: red; font-size: 11px;"> Enter a valid Contact Number</p>
+                  <p *ngIf="leaveForm.get('contactNo').hasError('required')  && submitleaveForm" style="color: red; font-size: 11px;">This field is required</p>
+                </div>
+              </div>
+              <div class="col-md-6 px-1">
+                <div class="form-group">
+                  <label>Age</label>
+                  <input type="number" class="form-control" placeholder="Enter your age" formControlName="age">
+                  <p *ngIf="leaveForm.get('age') && leaveForm.get('age')?.invalid && leaveForm.get('age')?.touched && submitleaveForm" style="color: red; font-size: 11px;"> Enter a valid Age</p>
+                  <p *ngIf="leaveForm.get('age').hasError('required')  && submitleaveForm" style="color: red; font-size: 11px;">This field is required</p>
+                </div>
+              </div> -->
+          <!-- <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Postal Code</label>
+                  <input type="number" class="form-control" placeholder="ZIP Code">
+                </div>
+              </div> -->
+          <!-- </div> -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Reason</label>
+                <textarea type="text" class="form-control" placeholder="Write your reason for leave"
+                  formControlName="reason"></textarea>
+                <p *ngIf="leaveForm.get('reason') && leaveForm.get('reason')?.invalid && leaveForm.get('reason')?.touched && submitLeaveForm"
+                  style="color: red; font-size: 11px;"> Enter a valid reason</p>
+                <p *ngIf="leaveForm.get('reason').hasError('required')  && submitLeaveForm"
+                  style="color: red; font-size: 11px;">This field is required</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="role">Designation</label>
+                   <ng-select [(ngModel)]="selectedCar">
+                    <ng-option *ngFor="let car of selectedCar" [value]="car.id">{{car.name}}</ng-option>
+                 </ng-select> 
+                 
+                 Using items input
+                 <ng-select 
+                            id="role",
+                            formControlName="designation",
+                            
+                            items="desig" 
+                            bindLabel="name" 
+                            bindValue="id" 
+                            placeholder="Select Designation"
+                            [(ngModel)]="selectedDesig"
+                            >
+                 </ng-select>  
+                </div>
+              </div>
+            </div> -->
+
+          <!-- <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>About Me</label>
+                  <textarea
+                    class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                </div>
+              </div>
+            </div> -->
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" (click)="showNotification('top','right')" class="btn btn-primary btn-round">Register
+                User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,456 @@
+<div class="card page-wrapper">
+
+  <!-- begin::Header -->
+  <div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h5 class="card-title">User List </h5>
+        </div>
+        <div class="d-flex justify-content-end">
+
+          <div >
+              <p class="mt-2 mr-2">Show by</p>
+          </div>
+          <div>
+              <select class="form-control" (change)="onTableSizeChange($event)">
+                  <option *ngFor="let size of pageSizes">
+                      {{size}}
+                  </option>
+              </select>
+          </div>
+      </div>
+        <!-- <div class="btnCreate">
+            <button routerLink="/leave/leavetype-add"> Create </button>
+        </div> -->
+    </div>
+    <nav>
+        <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" (click)="filterUser('Active')" type="button" role="tab" aria-controls="nav-home">Active</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Inactive')" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile">In-Active</button>
+      </div> -->
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <!-- <button class="nav-link" *ngFor="let data of visibleData" [class.active]="isActive === {{data.status}}"  id="nav-home-tab" data-bs-toggle="tab" (click)="showAll([allStatus])"  type="button" role="tab" aria-controls="nav-home">All</button> -->
+        <button class="nav-link" [class.active]="isActive === 'All'" id="nav-all-tab" data-bs-toggle="tab" (click)="filterUser('All')" type="button" role="tab" aria-controls="nav-all">All</button>
+        <button class="nav-link" [class.active]="isActive === 'Active'" id="nav-home-tab" data-bs-toggle="tab" (click)="filterUser('Active')" type="button" role="tab" aria-controls="nav-home">Active</button>
+        <button class="nav-link" [class.active]="isActive === 'Inactive'" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Inactive')" type="button" role="tab" aria-controls="nav-profile">In-Active</button>
+    </div>
+    
+      </nav>
+</div>
+  <div class="card-header border-0 pt-3 ">
+      <input class="form-control" [(ngModel)]="searchText" (keyup)="filterData()" placeholder="Type to search...">
+      
+    </div>
+<!-- end::Header -->
+<!-- begin::Body -->
+<div class="card-body py-3"  [ngClass]="'d-flex justify-content-center align-items-center'">
+  <!-- begin::Table container -->
+  
+  <div class="table-responsive" >
+      <!-- begin::Table -->
+      <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+          <!-- begin::Table head -->
+          <thead class="text-center">
+              <tr class="fw-bolder text-muted">
+                  <!-- <th class="min-w-140px">ID</th> -->
+                 <th class="min-w-130px">UserName</th>
+                  
+                  <th class="min-w-150px">Email</th>
+                  
+                  <!-- <th class="min-w-120px">Role</th> -->
+                  <!-- <th class="min-w-120px">Password</th> -->
+                  <!-- <th class="min-w-120px">Contact No</th> -->
+                  <!-- <th>weekly Time</th> -->
+
+                  <!-- <th class="min-w-120px">Family Contact No</th> -->
+                  <!-- <th class="min-w-120px">CNIC</th> -->
+                  <th class="min-w-120px">Designation</th>
+                  <!-- <th class="min-w-120px">Schedule</th> -->
+                  <!-- <th   class="min-w-120px">Total Leaves</th>
+                  <th class="min-w-120px">Remaining Leaves</th> -->
+                  <!-- <th class="min-w-220px">Address</th> -->
+                  <th class="min-w-120px">Image</th>
+                  <th class="min-w-120px">Status</th>
+                  <th>Job Status</th>
+                  <!-- <th class="min-w-120px">Created at</th>
+                  <th class="min-w-120px">Updated at</th> -->
+                  <!-- <th class="min-w-120px">Action</th> -->
+                  <th class="min-w-120px">Action</th>
+              </tr>
+          </thead>
+          <!-- end::Table head -->
+          <!-- begin::Table body -->
+          <tbody class="text-center">
+              <tr *ngFor="let data of visibleData; let i = index">
+             <!-- <td> -->
+              <!-- <a  class="text-dark fw-bolder text-hover-primary fs-6"> -->
+                <!-- {{data.id}} -->
+              <!-- </a> -->
+            <!-- </td> -->
+            <td>
+              <a routerLink="/userTimeDetails/{{data.id}}">  {{data.name}}</a>
+            </td>
+            <td>{{data.email}}</td>
+            <!-- <td>{{data.role}}</td> -->
+            <!-- <td>{{data.password}}</td> -->
+            <!-- <td>{{data.contactNo}}</td> -->
+            <!-- <td>{{data.famContactNo}}</td> -->
+            <!-- <td>{{data.cnic}}</td> -->
+            <td>{{data.designation}}</td>
+            <!-- <td>{{data.schedule}}</td> -->
+            <!-- <td>{{data.totalLeaves}}</td>
+            <td>{{data.remainingLeaves}}</td>             -->
+            <!-- <td>{{data.address}}</td> -->
+            <td>
+              <!-- <a href={{base+data.image}}>
+                  <img [src]="base+data.image" width="50px" height="50px" style="border-radius: 50%;"
+                      alt="">
+              </a> -->
+              <a href="javascript:void(0);" (click)="openImageModal(base + data.image)">
+                  <img [src]="base + data.image" width="40px" height="40px" style="border-radius: 50%;" alt="">
+                </a>
+          </td>
+          <div class="image-modal" *ngIf="showImageModal">
+              <div class="modal-content">
+                <span class="close" (click)="closeImageModal()">&times;</span>
+                <img [src]="currentImage" alt="Enlarged Image">
+              </div>
+            </div>
+            <!-- SHAHZAIB BHAIII ..... UI SWITCH HERE  -->
+            <!-- <td>{{data.status}} <ui-switch size="large" [(ngModel)]="data.status"></ui-switch></td> -->
+            <td>{{data.status}}</td>
+            <td>
+              <select (change)="onChangeStatus($event,data)" [(ngModel)]="data.isEmployee"
+              class="form-control">
+             <option value="Employee">Employee</option>
+             <option value="Suspend">Suspended</option>
+         </select>
+        </td>
+            <!-- <td>{{data.created_at}}</td>
+            <td>{{data.updated_at}}</td> -->
+            <td>
+              <button routerLink="/user/{{data.id}}" class="btn btn-primary btn-sm mr-1 btnView"
+              style="height: 32px;"><i class="fa fa-search pt-1"
+                   aria-hidden="true"></i></button>
+              <button routerLink="/edit-user/{{data.id}}"  class="btn btn-secondary btn-sm mr-1 btnEdit"
+              style="height: 32px;"><i
+                  class="fa fa-pencil-square-o pt-1" aria-hidden="true"></i></button>
+            
+            <!-- <td>
+
+              <a  class="
+                btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                me-1
+              ">
+                <app-keenicon name="pencil" class="fs-3"></app-keenicon>
+              </a>
+              <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                <app-keenicon name="trash" class="fs-3"></app-keenicon>
+              </a>
+            </td> -->
+          </tr>
+          </tbody>
+          <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+  </div>
+  <!-- <img src="../../../../assets/media/logos/loader.gif" width="50px" *ngIf="isLoading"> -->
+  <!-- end::Table container -->
+  <!-- <div class="row text-center">
+    <h4 *ngIf="users.length == 0 > 0">No Result</h4>
+  </div> -->
+</div>
+<div class="d-flex justify-content-center">
+  <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+      src="../../../../assets/gif/planet.gif">
+</div>
+<!-- begin::Body -->
+<!-- <div class="row"> -->
+  <div class="row paginator mt-3 d-flex justify-content-center mb-3">
+    <!-- Working Pagination  -->
+    <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+        <button class="btn btn-sm " (click)="prevPage()"
+            [disabled]="currentPage === 1">Prev</button>
+    </span>
+    <span class="my-auto col-md-3 col-5 col-sm-4 fs-3 col-lg-2" style="text-align: center;">
+
+        Page&nbsp;&nbsp;<!--[(ngModel)]="currentPage" -->
+        <input type="number" style="text-align: center;" [(ngModel)]="currentPage" (input)="onPageInputChange()"
+            min="1" max="{{ totalPages }}" /> &nbsp;of &nbsp;{{ totalPages }}
+        <!-- Page  &nbsp;&nbsp; {{ currentPage }}&nbsp;&nbsp;    of &nbsp;&nbsp;   {{ totalPages }} -->
+
+    </span>
+    <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+        <button class="btn btn-sm " (click)="nextPage()"
+            [disabled]="currentPage === totalPages">Next</button>
+    </span>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Users List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive"> -->
+            <!-- <div>
+              <input type="text" placeholder="Search" [(ngModel)]="searchText">
+            </div> -->
+            <!-- <table  class="table" dataTable>
+              <thead class=" text-primary">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Age</th> 
+                <th scope="col">Address</th>
+              </thead>
+              <tbody > -->
+                <!-- <tr>
+                  <td>
+                    Dakota Rice
+                  </td>
+                  <td>
+                    Niger
+                  </td>
+                  <td>
+                    Oud-Turnhout
+                  </td>
+                  <td class="text-right">
+                    $36,738
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Minerva Hooper
+                  </td>
+                  <td>
+                    Curaçao
+                  </td>
+                  <td>
+                    Sinaai-Waas
+                  </td>
+                  <td class="text-right">
+                    $23,789
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Sage Rodriguez
+                  </td>
+                  <td>
+                    Netherlands
+                  </td>
+                  <td>
+                    Baileux
+                  </td>
+                  <td class="text-right">
+                    $56,142
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Philip Chaney
+                  </td>
+                  <td>
+                    Korea, South
+                  </td>
+                  <td>
+                    Overland Park
+                  </td>
+                  <td class="text-right">
+                    $38,735
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Doris Greene
+                  </td>
+                  <td>
+                    Malawi
+                  </td>
+                  <td>
+                    Feldkirchen in Kärnten
+                  </td>
+                  <td class="text-right">
+                    $63,542
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Mason Porter
+                  </td>
+                  <td>
+                    Chile
+                  </td>
+                  <td>
+                    Gloucester
+                  </td>
+                  <td class="text-right">
+                    $78,615
+                  </td>
+                </tr> -->
+                <!-- <tr *ngFor="let user of users">
+                  <td scope="row">{{user.id}}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.age }}</td>
+                  <td>{{ user.contactNo }}</td>
+                  <td>{{ user.address }}</td>
+                </tr>
+            
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+    <!-- <div class="col-md-12">
+      <div class="card card-plain">
+        <div class="card-header">
+          <h4 class="card-title"> Table on Plain Background</h4>
+          <p class="card-category"> Here is a subtitle for this table</p>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Name
+                </th>
+                <th>
+                  Country
+                </th>
+                <th>
+                  City
+                </th>
+                <th class="text-right">
+                  Salary
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Dakota Rice
+                  </td>
+                  <td>
+                    Niger
+                  </td>
+                  <td>
+                    Oud-Turnhout
+                  </td>
+                  <td class="text-right">
+                    $36,738
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Minerva Hooper
+                  </td>
+                  <td>
+                    Curaçao
+                  </td>
+                  <td>
+                    Sinaai-Waas
+                  </td>
+                  <td class="text-right">
+                    $23,789
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Sage Rodriguez
+                  </td>
+                  <td>
+                    Netherlands
+                  </td>
+                  <td>
+                    Baileux
+                  </td>
+                  <td class="text-right">
+                    $56,142
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Philip Chaney
+                  </td>
+                  <td>
+                    Korea, South
+                  </td>
+                  <td>
+                    Overland Park
+                  </td>
+                  <td class="text-right">
+                    $38,735
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Doris Greene
+                  </td>
+                  <td>
+                    Malawi
+                  </td>
+                  <td>
+                    Feldkirchen in Kärnten
+                  </td>
+                  <td class="text-right">
+                    $63,542
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Mason Porter
+                  </td>
+                  <td>
+                    Chile
+                  </td>
+                  <td>
+                    Gloucester
+                  </td>
+                  <td class="text-right">
+                    $78,615
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Jon Porter
+                  </td>
+                  <td>
+                    Portugal
+                  </td>
+                  <td>
+                    Gloucester
+                  </td>
+                  <td class="text-right">
+                    $98,615
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

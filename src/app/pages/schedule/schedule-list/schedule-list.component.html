@@ -1,0 +1,159 @@
+<div class="card page-wrapper">
+    <!-- begin::Header  [(ngModel)]="searchText" -->
+    <div class="container-fluid mt-4">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">List </h5>
+            </div>
+            <div class="d-flex justify-content-end">
+
+                <div >
+                    <p class="mt-2 mr-2">Show by</p>
+                </div>
+                <div>
+                    <select class="form-control" (change)="onTableSizeChange($event)">
+                        <option *ngFor="let size of pageSizes">
+                            {{size}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="btnCreate">
+                <button routerLink="/leave/leavetype-add"> Create </button>
+            </div> -->
+        </div>
+        <nav>
+            <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" (click)="filterUser('Active')" type="button" role="tab" aria-controls="nav-home">Active</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Inactive')" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile">In-Active</button>
+          </div> -->
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <!-- <button class="nav-link" *ngFor="let data of visibleData" [class.active]="isActive === {{data.status}}"  id="nav-home-tab" data-bs-toggle="tab" (click)="showAll([allStatus])"  type="button" role="tab" aria-controls="nav-home">All</button> -->
+            <button class="nav-link" [class.active]="isActive === 'All'" id="nav-all-tab" data-bs-toggle="tab" (click)="filterUser('All')" type="button" role="tab" aria-controls="nav-all">All</button>
+       
+            <button class="nav-link" [class.active]="isActive === 'Morning'" id="nav-home-tab" data-bs-toggle="tab" (click)="filterUser('Morning')" type="button" role="tab" aria-controls="nav-home">Morning</button>
+            <button class="nav-link" [class.active]="isActive === 'Afternoon'" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Afternoon')" type="button" role="tab" aria-controls="nav-profile">Afternoon</button>
+            <button class="nav-link" [class.active]="isActive === 'Evening'" id="nav-profile-tab" data-bs-toggle="tab" (click)="filterUser('Evening')" type="button" role="tab" aria-controls="nav-profile">Evening</button>
+        </div>
+        
+          </nav>
+    </div>
+    <div class="card-header border-0  ">
+
+
+        
+        <div>
+            <input class="form-control" [(ngModel)]="searchText" (keyup)="filterData()" placeholder="Type to search...">
+        </div>
+        <!-- end::Header -->
+        <!-- begin::Body -->
+        <div class="card-body py-3" [ngClass]="'d-flex justify-content-center align-items-center'">
+            <!-- begin::Table container -->
+            <div class="table-responsive">
+                <!-- begin::Table -->
+                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                    <!-- begin::Table head -->
+                    <thead class="text-center">
+                        <tr class="fw-bolder text-muted">
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Time in</th>
+                            <th>Time out</th>
+                            <!-- <th class="min-w-140px">ID</th> -->
+                            <th>Late</th>
+                           
+                            <th>Actions</th>
+                      
+                        </tr>
+                    </thead>
+                    <!-- end::Table head -->
+                    <!-- begin::Table body -->
+                    <tbody class="text-center">
+                        <tr *ngFor="let data of visibleData">
+                            <td>{{data.id}}</td>
+                            <!-- <td>
+                            <a  class="text-dark fw-bolder text-hover-primary fs-6">
+                            {{data.id}}
+                            </a>
+                        </td> -->
+                            <!-- <td>
+                                {{data.adminId}}
+                            </td> -->
+                            <td>{{data.type}}</td>
+                            <td>{{data.timeIn | customTimePipe}}</td>
+                            <td>{{data.timeOut | customTimePipe }}</td>
+                            <td>{{data.late | customTimePipe}}</td>
+                            <td>
+                                <!-- <button routerLink="/requirements/requirement-details/{}" class="btn btn-primary btn-sm mr-1 btnView"
+                                style="background-color: #d72480;height: 32px;"><i class="fa fa-search pt-1"
+                                     aria-hidden="true"></i></button> -->
+                                <button routerLink="/schedule/schedule-edit/{{data.id}}"
+                                    class="btn btn-secondary btn-sm mr-1 btnEdit"
+                                    style="height: 32px;"><i
+                                        class="fa fa-pencil-square-o pt-1" aria-hidden="true"></i></button>
+                                <button (click)="schedulePassId(data.id)" data-toggle="modal" data-target="#exampleModal" class="btn btn-danger btn-sm btnDel"
+                                    style="height: 32px;"><i class="fa fa-trash-o pt-1"
+                                        aria-hidden="true"></i></button>
+                            </td>
+                                 <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure, you want to delete this item?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" (click)="scheduleDel(selectedScheduleId)" data-dismiss="modal"
+                                            class="btn ml-2 btn-primary">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </tr>
+                    </tbody>
+                    <!-- end::Table body -->
+                </table>
+                <!-- end::Table -->
+            </div>
+            <!-- <img src="../../../../assets/media/logos/loader.gif" width="50px" *ngIf="isLoading"> -->
+            <!-- end::Table container -->
+            <!-- <div class="row text-center">
+      <h4 *ngIf="users.length == 0 > 0">No Result</h4>
+    </div> -->
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+                src="../../../../assets/gif/planet.gif">
+        </div>
+        <!-- begin::Body -->
+        <!-- <div class="row"> -->
+        <div class="row paginator mt-3 d-flex justify-content-center mb-3">
+            <!-- Working Pagination  -->
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm" (click)="prevPage()"
+                    [disabled]="currentPage === 1">Prev</button>
+            </span>
+            <span class="my-auto col-md-3 col-5 col-sm-4 fs-3 col-lg-2" style="text-align: center;">
+
+                Page&nbsp;&nbsp;<!--[(ngModel)]="currentPage" -->
+                <input type="number" style="text-align: center;" [(ngModel)]="currentPage" (input)="onPageInputChange()"
+                    min="1" max="{{ totalPages }}" /> &nbsp;of &nbsp;{{ totalPages }}
+                <!-- Page  &nbsp;&nbsp; {{ currentPage }}&nbsp;&nbsp;    of &nbsp;&nbsp;   {{ totalPages }} -->
+
+            </span>
+            <span class="col-md-2 col-3 col-sm-3 col-lg-2" style="text-align: center;">
+                <button class="btn btn-sm" (click)="nextPage()"
+                    [disabled]="currentPage === totalPages">Next</button>
+            </span>
+        </div>
+
+    </div>

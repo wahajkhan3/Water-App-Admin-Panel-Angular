@@ -1,0 +1,69 @@
+
+<!-- background: linear-gradient(90deg, rgba(91,88,88,1) 24%, rgba(27,25,25,1) 75%, rgba(0,0,0,1) 100%); -->
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top" style="background-color: white;border-left: black; border-bottom: black;border: 1px;
+
+">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-toggle">
+        <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      
+
+      
+      
+      <a class="navbar-brand text-dark" *ngIf="dashboard" href="javascript:void(0)">Dashboard</a>
+      <a class="navbar-brand text-dark" *ngIf="adminsign" href="javascript:void(0)">Admin</a>
+      <a class="navbar-brand text-dark" *ngIf="designation" href="javascript:void(0)">Designation</a>
+      <a class="navbar-brand text-dark" *ngIf="userSign" href="javascript:void(0)">User</a>
+      <a class="navbar-brand text-dark" *ngIf="leave" href="javascript:void(0)">Leave</a>
+      <a class="navbar-brand text-dark" *ngIf="schedule" href="javascript:void(0)">Schedule</a>
+      <a class="navbar-brand text-dark" *ngIf="task" href="javascript:void(0)">Task</a>
+      <a class="navbar-brand text-dark" *ngIf="customer" href="javascript:void(0)">Customer</a>
+      <a class="navbar-brand text-dark" *ngIf="area" href="javascript:void(0)">Area</a>
+      <a class="navbar-brand text-dark" *ngIf="deliveryBoy" href="javascript:void(0)">Delivery Boy</a>
+    </div>
+      <a class="navbar-brand text-dark" href="javascript:void(0)">{{getTitle()}}</a>
+    <button class="navbar-toggler" type="button" (click)="collapse()"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+ 
+      <ul class="navbar-nav">
+        
+
+        <!-- <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
+          <a class="nav-link" ngbDropdownToggle id="navbarDropdownMenuLink" >
+            <i class="nc-icon nc-bell-55"></i>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
+            <a ngbDropdownItem href="javascript:void(0)">Action</a>
+            <a ngbDropdownItem href="javascript:void(0)">Another action</a>
+            <a ngbDropdownItem href="javascript:void(0)">Something else here</a>
+          </div>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link btn-rotate" (click)="logout()" href="javascript:void(0)">
+            
+            <span class="">Logout &nbsp; </span>
+            <i class="nc-icon nc-share-66" style="color: black;transform: rotate(90deg);"></i>
+            <!-- <p>
+              
+              <span class="">&nbsp; Logout</span>
+            </p> -->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

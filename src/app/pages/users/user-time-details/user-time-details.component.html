@@ -1,0 +1,302 @@
+<div class="card page-wrapper">
+    <div class="p-4">
+        <div class="mb-2">
+            <strong style="font-size: 1.2rem;">Select Date Range</strong>
+        </div>
+        <form class="row">
+
+            <div class="dp-hidden">
+
+                <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                    outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" />
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                </ng-template>
+
+            </div>
+            <div class="row">
+                <div class="col-4 text-center" style="position: relative;
+                    top: 5px;
+                    left: 18px;">
+                    <p>Start From: </p>
+                </div>
+                <div class="col-6">
+                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                        [value]="formatDate(fromDate)" (input)="fromDate" />
+                </div>
+                <div class="col-2">
+                    <button style="position: absolute;
+                    top: -10px;
+                    left: -19px;
+                    height: 86%;" class="btn btn-sm nc-icon nc-calendar-60" (click)="datepicker.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 align-middle text-center" style="position: relative;
+                top: 5px;
+                left: 18px;">
+
+                    <p>End To: </p>
+
+                </div>
+                <div class="col-6">
+                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                        [value]="formatDate(toDate)" (input)="toDate" />
+                </div>
+                <div class="col-2">
+
+                    <button style="position: absolute;
+                    top: -10px;
+                    left: -19px;
+                    height: 86%;" class="btn btn-sm nc-icon nc-calendar-60" (click)="datepicker.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+        </form>
+        <button (click)="resetDate()" class="btn btn-sm btn-secondary">Reset Date</button>
+        <!-- 
+        <hr />
+        <pre>From date model: {{ fromDate | json }}</pre>
+        <pre>To date model: {{ toDate | json }}</pre> -->
+    </div>
+</div>
+<div *ngIf="!showDateFilter">
+
+    <div class="card page-wrapper" *ngFor="let data of users">
+
+
+        <div class="card-header border-0 ">
+            <ng-container class="mb-3 mt-3 ">
+                <div>
+
+                    <div class="d-flex justify-content-between">
+                        <div style="cursor: pointer;">
+                            <p>Date : {{data.date}}</p>
+                        </div>
+                        <div>
+                            <p> Total Time : {{data.status}}</p>
+                        </div>
+                    </div>
+                    <div class="card-body py-3"
+                        *ngIf="data.status==='Absent'? false: true && data.status==='Leave'?false:true">
+                        <div class="row">
+                            <div class="table-responsive col-12">
+
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="text-center">
+                                        <tr class="fw-bolder text-muted">
+
+                                            <th>Time in</th>
+                                            <th>Time Out</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="text-center">
+                                        <tr *ngFor="let timesInOut of data.timeInOut">
+                                            <!-- *ngIf="logs.date === selected.dates" -->
+                                            <ng-container>
+
+                                                <!-- <td>{{data.timeInOut.checkIn}}</td> -->
+                                                <td>{{timesInOut.checkIn}}</td>
+                                                <td>{{timesInOut.checkOut}}</td>
+                                                <!-- <td>{{checks.checkIn.split(' ')[0]}}&nbsp; {{ checks.checkIn.split(' ')[1]}}
+                                            </td>
+                                            <td>{{checks.checkOut.split(' ')[0]}}&nbsp;{{ checks.checkOut.split('
+                                                ')[1]}}</td>  -->
+                                            </ng-container>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- <div class="table-responsive col-6">
+                            <table *ngIf="logs.status !== 'Absent'"
+                            class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                            
+                            <thead class="text-center">
+                                <tr class="fw-bolder text-muted">
+                                    
+                                    
+                                    <th>Breaks In</th>
+                                    <th>Breaks Out</th>
+                                    
+                                </tr>
+                            </thead>
+                            
+                            <tbody class="text-center">
+                                    <tr *ngFor="let breakss of forBreakInOut">
+
+                                        <ng-container *ngIf="logs.date === breakss.datess">
+                                            <td>{{breakss.breakIn.split(' ')[0]}}&nbsp;{{breakss.breakIn.split(' ')[1]}}
+                                            </td>
+                                            <td>{{breakss.breakOut.split(' ')[0]}}&nbsp;{{breakss.breakOut.split('
+                                                ')[1]}}</td>
+                                        </ng-container>
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                            </table>
+                        </div> -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div *ngIf="showDateFilter">
+
+    <div class="card page-wrapper" *ngFor="let data of filterUser">
+
+
+        <div class="card-header border-0 ">
+            <ng-container class="mb-3 mt-3 ">
+                <div>
+
+                    <div class="d-flex justify-content-between">
+                        <div style="cursor: pointer;">
+                            <p>Date : {{data.date}}</p>
+                        </div>
+                        <div>
+                            <p> Total Time : {{data.status}}</p>
+                        </div>
+                    </div>
+                    <div class="card-body py-3"
+                        *ngIf="data.status==='Absent'? false: true && data.status==='Leave'?false:true">
+                        <div class="row">
+                            <div class="table-responsive col-12">
+
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="text-center">
+                                        <tr class="fw-bolder text-muted">
+
+                                            <th>Time in</th>
+                                            <th>Time Out</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="text-center">
+                                        <tr *ngFor="let timesInOut of data.timeInOut">
+                                            <!-- *ngIf="logs.date === selected.dates" -->
+                                            <ng-container>
+
+                                                <!-- <td>{{data.timeInOut.checkIn}}</td> -->
+                                                <td>{{timesInOut.checkIn}}</td>
+                                                <td>{{timesInOut.checkOut}}</td>
+                                                <!-- <td>{{checks.checkIn.split(' ')[0]}}&nbsp; {{ checks.checkIn.split(' ')[1]}}
+                                            </td>
+                                            <td>{{checks.checkOut.split(' ')[0]}}&nbsp;{{ checks.checkOut.split('
+                                                ')[1]}}</td>  -->
+                                            </ng-container>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<!-- <div class="card page-wrapper" *ngFor="let data of users">
+    
+    
+    <div *ngIf="!showSingleDetail" class="card-header border-0  ">
+        <ng-container class="mb-3 mt-3 ">
+            <div>
+                
+                <div  class="d-flex justify-content-between">
+                    <div >
+                        <p >Date : {{data.date}}</p>
+                    </div>
+                    <div>
+                        <p> Total Time : {{data.status}}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div> -->
+<!-- <div class="card page-wrapper">
+
+    <div class="container-fluid mt-4">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">List </h5>
+            </div>
+            <div class="btnCreate">
+                <button class="btn btn-outline-danger" routerLink="/userlist"> Back </button>
+            </div>
+        </div>
+       
+    </div>
+    <div class="card-header border-0  ">
+
+
+        
+        <div class="card-body py-3" [ngClass]="'d-flex justify-content-center align-items-center'">
+
+            <div class="table-responsive">
+
+                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                    <thead class="text-center">
+                        <tr class="fw-bolder text-muted">
+
+                            <th>Date</th>
+                            <th>Time in</th>
+                            <th>Time Out</th>
+                            <th>Breaks In</th>
+                            <th>Breaks Out</th>
+                            <th>Total Time</th>
+
+                            
+                      
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-center">
+                        <tr *ngFor="let data of users">
+                            <td>{{data.checkLogs.date}}</td>
+
+                            <td>{{data.checkInOut.checkIn}}</td>
+                            <td>{{data.checkInOut.checkOut}}</td>
+                            <td>{{data.breakInOut.breakIn}}</td>
+                            <td>{{data.breakInOut.breakOut}}</td>
+                            <td>{{data.checkLogs.status}}</td>
+
+                            
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <img style="margin: 0 auto; margin-bottom: 30px;" *ngIf="isLoading" width="85px"
+                src="../../../../../assets/gif/planet.gif">
+        </div>
+
+        
+
+    </div> -->

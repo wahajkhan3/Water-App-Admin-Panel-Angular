@@ -1,0 +1,35 @@
+ul li{
+    list-style: none;
+}
+.sidebar-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+.sidebar-content {
+    max-height: 100%;
+    overflow: hidden;
+    padding-right: 15px; /* Add right padding to avoid overlapping with scrollbar */
+    transition: 0.3s;
+}
+
+.sidebar-content:hover{
+   
+    overflow-y: auto;
+    transition: overflow 0.3s;
+}
+
+/* Decrease the width of the scrollbar */
+.sidebar-content::-webkit-scrollbar {
+    width: 3px; 
+}
+
+/* Customize the scrollbar track */
+.sidebar-content::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Change the background color if needed */
+}
+
+/* Customize the scrollbar thumb */
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: #888; /* Change the thumb color */
+    border-radius: 3px; /* Add rounded corners */
+}

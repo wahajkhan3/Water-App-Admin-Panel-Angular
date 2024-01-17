@@ -1,0 +1,96 @@
+* {
+  overflow: hidden;
+}
+
+// .modal {
+//   display: none;
+//   position: fixed;
+//   top: 0;
+//   left: 19%;
+//   width: 82%;
+//   height: 100vh;
+//   padding-left: 100px;
+//   padding-right: 100px;
+//   backdrop-filter: blur(2.5px);
+//   /* Add the blur effect */
+//   background: rgba(0, 0, 0, 0.3);
+//   z-index: 999;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .modal-content {
+//   background: white;
+//   padding: 20px;
+//   border-radius: 5px;
+//   width: 65%;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+//   text-align: center;
+// }
+
+
+// .modal button {
+//   color: white;
+//   border: none;
+//   padding: 5px 10px;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   margin: 10px;
+//   width: 50%;
+//   font-weight: bold;
+//   font-size: 13px;
+
+// }
+
+// #btn-1 {
+//   background: #EA5455;
+
+// }
+
+// #btn-2 {
+//   background-color: #5e5a5a;
+// }
+
+// #btn-1:hover {
+//   background-color: #d64040;
+//   box-shadow: 1px 2px 5px 8px rgba(216, 53, 53, 0.56);
+//   -webkit-box-shadow: 1px 2px 5px 8px rgba(216, 53, 53, 0.56);
+//   -moz-box-shadow: 1px 2px 5px 8px rgba(216, 53, 53, 0.56);
+// }
+
+// #btn-2:hover {
+//   background-color: #3d3c3c;
+//   box-shadow: 1px 2px 5px 8px rgba(155, 154, 154, 0.75);
+//   -moz-box-shadow: 1px 2px 5px 8px rgba(155, 154, 154, 0.75);
+//   -webkit-box-shadow: 1px 2px 5px 8px rgba(155, 154, 154, 0.75);
+// }
+
+// .modal p {
+//   font-size: 13.5px;
+//   font-weight: 600;
+// }
+
+.nav-link.active {
+  // background-color: wheat; /* Change to your desired dark color for active */
+
+  border: 1px solid #ddd;
+  border-bottom: none;
+
+  // color: gray; /* Change the text color to white or another suitable color */
+}
+
+.nav-link:not(.active) {
+  border: none;
+  // background-color: black /* Change to your desired color for inactive */;
+  // color: red; /* Change the text color for inactive */;
+}
+
+.nav-link:focus {
+  outline: none
+    /* Remove the focus outline */
+}
+
+// .modal-content-button:focus {
+//   outline: none;
+// }
